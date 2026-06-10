@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aberdeen AI Offering Deep Dive · Pitch Deck Generator</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+  :root {
+    --aberdeen-blue: #09375F;
+    --teal: #44B0B1;
+    --onyx: #404040;
+    --white: #FFFFFF;
+    --sky: #5CC8FF;
+    --jade: #00A676;
+    --teal-light: #e8f7f7;
+    --teal-mid: #c2e8e8;
+    --border: #d0e4ec;
+    --bg: #f4f8fb;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--onyx);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--aberdeen-blue);
+    padding: 28px 48px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    right: -60px;
+    top: -40px;
+    width: 260px;
+    height: 260px;
+    background: var(--teal);
+    opacity: 0.18;
+    transform: rotate(35deg);
+    pointer-events: none;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    right: 40px;
+    top: -60px;
+    width: 180px;
+    height: 300px;
+    background: var(--teal);
+    opacity: 0.10;
+    transform: rotate(35deg);
+    pointer-events: none;
+  }
+  .logo-area {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .logo-text {
+    font-size: 22px;
+    font-weight: 200;
+    color: var(--white);
+    letter-spacing: 0.5px;
+    line-height: 1;
+  }
+  .logo-text strong { font-weight: 600; }
+  .logo-slash {
+    color: var(--teal);
+    font-weight: 600;
+    margin-right: 2px;
+  }
+  .header-sub {
+    font-size: 11px;
+    color: var(--teal);
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .header-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(68,176,177,0.4);
+    margin: 0 12px;
+  }
+  .header-title {
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.4;
+  }
+
+  /* MAIN */
+  .main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .intro-card {
+    background: var(--white);
+    border-left: 4px solid var(--teal);
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin-bottom: 36px;
+    font-size: 13.5px;
+    color: var(--onyx);
+    line-height: 1.7;
+  }
+  .intro-card strong { color: var(--aberdeen-blue); }
+
+  /* SECTION */
+  .section {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .section-header {
+    background: var(--aberdeen-blue);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-num {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--teal);
+    color: var(--aberdeen-blue);
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--white);
+    letter-spacing: 0.3px;
+  }
+  .section-subtitle {
+    font-size: 11px;
+    color: rgba(68,176,177,0.9);
+    font-weight: 300;
+    margin-left: auto;
+  }
+  .section-body {
+    padding: 20px 24px;
+    display: grid;
+    gap: 16px;
+  }
+  .section-body.cols-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* FIELD */
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field.span-2 { grid-column: span 2; }
+
+  label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--aberdeen-blue);
+    letter-spacing: 0.2px;
+  }
+  .field-hint {
+    font-size: 11px;
+    color: #7a9ab0;
+    margin-top: 1px;
+    line-height: 1.4;
+  }
+
+  input[type="text"],
+  textarea,
+  select {
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 13px;
+    color: var(--onyx);
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 5px;
+    padding: 9px 12px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    outline: none;
+    resize: vertical;
+    width: 100%;
+  }
+  input[type="text"]:focus,
+  textarea:focus,
+  select:focus {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(68,176,177,0.12);
+    background: var(--white);
+  }
+  textarea { min-height: 72px; }
+  textarea.tall { min-height: 96px; }
+
+  /* CHIPS */
+  .chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 2px;
+  }
+  .chip-group label {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--onyx);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    background: var(--bg);
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .chip-group input[type="checkbox"] { display: none; }
+  .chip-group input[type="checkbox"]:checked + span {
+    /* handled via JS class */
+  }
+  .chip-group label.active {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: var(--aberdeen-blue);
+    font-weight: 500;
+  }
+
+  /* GENERATE SECTION */
+  .generate-section {
+    background: var(--aberdeen-blue);
+    border-radius: 10px;
+    padding: 32px;
+    margin-top: 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .generate-section::after {
+    content: '';
+    position: absolute;
+    right: -40px; bottom: -40px;
+    width: 200px; height: 200px;
+    background: var(--teal);
+    opacity: 0.12;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .generate-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .generate-desc {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 22px;
+    line-height: 1.6;
+  }
+  .generate-btn {
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--aberdeen-blue);
+    background: var(--teal);
+    border: none;
+    border-radius: 6px;
+    padding: 13px 32px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .generate-btn:hover { background: #5bc8c9; transform: translateY(-1px); }
+  .generate-btn:active { transform: translateY(0); }
+
+  /* OUTPUT */
+  .output-area {
+    display: none;
+    margin-top: 28px;
+  }
+  .output-area.visible { display: block; }
+  .output-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .output-box {
+    background: #0a2a45;
+    border: 1px solid rgba(68,176,177,0.3);
+    border-radius: 8px;
+    padding: 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: #c8e6f0;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 480px;
+    overflow-y: auto;
+    position: relative;
+  }
+  .copy-btn {
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--aberdeen-blue);
+    background: var(--white);
+    border: none;
+    border-radius: 5px;
+    padding: 8px 20px;
+    cursor: pointer;
+    margin-top: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.12s;
+  }
+  .copy-btn:hover { background: var(--teal-light); }
+  .copy-btn.copied { background: var(--jade); color: var(--white); }
+
+  .instructions {
+    background: rgba(68,176,177,0.08);
+    border: 1px solid rgba(68,176,177,0.25);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-top: 16px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+  .instructions strong { color: var(--teal); }
+
+  /* PROGRESS BAR */
+  .progress-bar {
+    height: 3px;
+    background: rgba(68,176,177,0.2);
+    border-radius: 2px;
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--teal);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+    width: 0%;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .section-body.cols-2 { grid-template-columns: 1fr; }
+    .field.span-2 { grid-column: span 1; }
+    .header { padding: 20px 20px; }
+    .main { padding: 24px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo-area">
+    <div class="logo-text"><span class="logo-slash">/</span><strong>Aberdeen</strong></div>
+    <div style="font-size:10px;color:rgba(255,255,255,0.5);letter-spacing:3px;text-transform:uppercase;font-weight:300;">Advisors</div>
+    <div class="header-sub">AI Offsite · June 2026</div>
+  </div>
+  <div class="header-divider"></div>
+  <div class="header-title">Offering Deep Dive<br><span style="color:rgba(68,176,177,0.8);font-size:12px;">Fill this out → paste prompt into Claude → get your pitch deck</span></div>
+</div>
+
+<div class="main">
+
+  <div class="intro-card">
+    <strong>How this works:</strong> Fill out the form below for your chosen offering. When you're done, click <em>Generate Prompt</em> — you'll get a formatted block to paste directly into Claude (with both skills active). Claude will research your market, write all 5 slides, and produce a branded .pptx ready for your Shark Tank pitch.
+  </div>
+
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">Offering Identity</div>
+      <div class="section-subtitle">What is it, who is it for</div>
+    </div>
+    <div class="section-body cols-2">
+      <div class="field span-2">
+        <label for="offering_name">Offering Name *</label>
+        <input type="text" id="offering_name" placeholder="e.g. Core AI — ML Models & Dashboards">
+      </div>
+      <div class="field span-2">
+        <label for="one_liner">One-Line Description *</label>
+        <input type="text" id="one_liner" placeholder="e.g. Production-grade ML models surfaced through live dashboards that drive day-to-day decisions">
+      </div>
+      <div class="field span-2">
+        <label for="target_client">Target Client / ICP *</label>
+        <input type="text" id="target_client" placeholder="e.g. Mid-market PE-backed companies ($50M–$500M) with siloed data and manual reporting">
+      </div>
+      <div class="field">
+        <label>Who is the primary buyer?</label>
+        <div class="chip-group" id="buyer_chips">
+          <label><input type="checkbox" value="CFO"><span>CFO</span></label>
+          <label><input type="checkbox" value="COO"><span>COO</span></label>
+          <label><input type="checkbox" value="CTO"><span>CTO</span></label>
+          <label><input type="checkbox" value="CDO / Head of Data"><span>CDO / Head of Data</span></label>
+          <label><input type="checkbox" value="CEO"><span>CEO</span></label>
+          <label><input type="checkbox" value="VP of Operations"><span>VP of Operations</span></label>
+          <label><input type="checkbox" value="Board / PE Sponsor"><span>Board / PE Sponsor</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Engagement model</label>
+        <div class="chip-group" id="engagement_chips">
+          <label><input type="checkbox" value="Sprint-based Build"><span>Sprint-based Build</span></label>
+          <label><input type="checkbox" value="Managed Build"><span>Managed Build</span></label>
+          <label><input type="checkbox" value="Retainer / Advisory"><span>Retainer / Advisory</span></label>
+          <label><input type="checkbox" value="Assessment / Audit"><span>Assessment / Audit</span></label>
+          <label><input type="checkbox" value="Workshop"><span>Workshop</span></label>
+          <label><input type="checkbox" value="Managed Service"><span>Managed Service</span></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">The Problem</div>
+      <div class="section-subtitle">Pain, prior attempts, urgency</div>
+    </div>
+    <div class="section-body">
+      <div class="field">
+        <label for="problem">Client Problem — What pain are they in? *</label>
+        <textarea id="problem" class="tall" placeholder="e.g. Leaders fly blind on forecasting, churn, and pipeline because data lives in spreadsheets and Salesforce reports. No one trusts the numbers; every Monday is a manual fire drill."></textarea>
+        <div class="field-hint">Be specific. Name the symptom (not the solution). Quantify if you can — hours wasted, error rates, revenue impact.</div>
+      </div>
+      <div class="field">
+        <label for="prior_attempts">What have they tried before, and why didn't it work?</label>
+        <textarea id="prior_attempts" placeholder="e.g. They bought a BI tool, hired offshore analysts, tried to use Salesforce reports. None of it learned from the data or connected the silos. Still exporting to Excel every Friday."></textarea>
+        <div class="field-hint">This is gold for the pitch — it shows you understand why point solutions fail and positions Aberdeen's approach as different.</div>
+      </div>
+      <div class="field">
+        <label for="why_now">Why now? What's changed that makes this urgent?</label>
+        <textarea id="why_now" placeholder="e.g. PE sponsor is demanding 90-day forecasting accuracy. Competitors have deployed ML dashboards. Their data infrastructure finally supports it after last year's Snowflake migration."></textarea>
+        <div class="field-hint">Could be market pressure, technology shift, regulatory change, competitor move, internal milestone. Helps Claude find supporting market data.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">What They Get</div>
+      <div class="section-subtitle">Outcomes, deliverables, timeline</div>
+    </div>
+    <div class="section-body">
+      <div class="field">
+        <label for="outcome">Outcome / Value Delivered *</label>
+        <textarea id="outcome" placeholder="e.g. Trusted ML-driven forecasts and KPIs in a live dashboard, replacing weekly manual reporting cycles. Decision-makers get answers in seconds, not after a Monday morning Slack thread."></textarea>
+        <div class="field-hint">Write this from the client's perspective. What does their world look like after Aberdeen delivers? What can they do that they couldn't before?</div>
+      </div>
+      <div class="field">
+        <label for="deliverables">3–4 Specific Deliverables — What do they literally receive? *</label>
+        <textarea id="deliverables" placeholder="1. Production ML model (forecasting + churn) with evaluation report&#10;2. Live Power BI / Streamlit dashboard connected to their warehouse&#10;3. Monitoring dashboard + drift alert playbook&#10;4. Internal handoff doc + 30-day hypercare"></textarea>
+        <div class="field-hint">Name each deliverable like an artifact. "Strategy sessions" is bad. "90-day AI roadmap with prioritized use case backlog" is good.</div>
+      </div>
+      <div class="field">
+        <label for="phases">Engagement Phases (if applicable) — How does the work progress?</label>
+        <textarea id="phases" placeholder="Phase 1 — Discover (2 wks): data audit, stakeholder interviews, model scoping&#10;Phase 2 — Build (6–8 wks): model training, dashboard dev, eval loops&#10;Phase 3 — Operate (ongoing): monitoring, drift detection, retainer option"></textarea>
+        <div class="field-hint">If your engagement has clear phases, list them here. This powers Slide 3's timeline layout. If it's more parallel work, skip this and the card layout will be used instead.</div>
+      </div>
+      <div class="field">
+        <label for="timeline">Typical Timeline</label>
+        <input type="text" id="timeline" placeholder="e.g. 6–12 weeks build; optional ongoing monitoring retainer">
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">Why Aberdeen</div>
+      <div class="section-subtitle">Differentiation, stickiness, moat</div>
+    </div>
+    <div class="section-body">
+      <div class="field">
+        <label for="why_aberdeen">Why Aberdeen over a big consulting firm? *</label>
+        <textarea id="why_aberdeen" placeholder="e.g. Big 4 will staff a team of juniors, take 6 months, and hand off a deck. We deploy senior engineers from week 1. Fixed-fee, no surprise overruns. We've built this exact model for 3 similar clients already."></textarea>
+      </div>
+      <div class="field">
+        <label for="why_not_saas">Why Aberdeen over an off-the-shelf SaaS tool?</label>
+        <textarea id="why_not_saas" placeholder="e.g. Generic ML platforms don't know your data schema, your business rules, or what 'good' looks like for your KPIs. We build a model trained on your history, validated against your ground truth."></textarea>
+      </div>
+      <div class="field">
+        <label for="stickiness">What makes this sticky / hard to walk away from?</label>
+        <textarea id="stickiness" placeholder="e.g. The model is trained on their data and continuously improved. The dashboard becomes their operating system. Switching cost is high — not because of contracts but because it works and they depend on it."></textarea>
+        <div class="field-hint">This is your retention argument. Think about what would have to be true for a client to leave — and why that's unlikely.</div>
+      </div>
+      <div class="field">
+        <label for="tools">Key Tools, Platforms, or Aberdeen IP Used</label>
+        <input type="text" id="tools" placeholder="e.g. Python/sklearn/XGBoost, Snowflake, Power BI / Streamlit, internal eval harness, reusable ML template">
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div class="section-title">The Ask</div>
+      <div class="section-subtitle">Pricing, metrics, next steps</div>
+    </div>
+    <div class="section-body cols-2">
+      <div class="field">
+        <label for="pricing">Pricing Model & Range *</label>
+        <input type="text" id="pricing" placeholder="e.g. Fixed-fee build $120–250k + optional $8–15k/mo Operate retainer">
+      </div>
+      <div class="field">
+        <label for="offering_lead">Offering Lead / Owner</label>
+        <input type="text" id="offering_lead" placeholder="e.g. Michael Perlis">
+      </div>
+      <div class="field span-2">
+        <label for="success_metrics">Success Metrics / KPIs — How do we prove it worked?</label>
+        <textarea id="success_metrics" placeholder="e.g. Model accuracy vs baseline; dashboard DAU; weekly reporting hours eliminated (target: 8 hrs → <30 min); client NPS at 90 days"></textarea>
+        <div class="field-hint">At least one metric should be quantified. These go directly on Slide 5.</div>
+      </div>
+      <div class="field span-2">
+        <label for="sales_motion">Sales Motion — How do we actually sell this?</label>
+        <textarea id="sales_motion" placeholder="e.g. Discovery workshop (Aberdeen covers prep) → scoped proposal in 5 days → fixed-fee SOW → kickoff within 2 weeks. Led by Offering Lead with David Wise / Michael Perlis on discovery."></textarea>
+        <div class="field-hint">Name the specific steps and who owns each one. This becomes the 3 Next Steps on Slide 5.</div>
+      </div>
+      <div class="field span-2">
+        <label for="risks">Risks / Open Questions (be honest)</label>
+        <textarea id="risks" placeholder="e.g. Client data access often slow — first engagements may run over. Reusable template still maturing. Need 1 more ML engineer on the bench before scaling this offering."></textarea>
+        <div class="field-hint">These won't appear on the deck but will be flagged in Claude's summary so the team knows what to address in Q&A.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GENERATE -->
+  <div class="generate-section">
+    <div class="generate-title">Ready to Generate Your Pitch Deck</div>
+    <div class="generate-desc">Click below to create a formatted prompt. Paste it into Claude with both the <strong style="color:var(--teal)">aberdeen-brand</strong> and <strong style="color:var(--teal)">offering-pitch-deck</strong> skills active. Claude will research market data, write 5 compelling slides, and produce a branded .pptx file you can download.</div>
+    <button class="generate-btn" onclick="generatePrompt()">⚡ Generate Prompt</button>
+
+    <div class="output-area" id="outputArea">
+      <div class="output-label">Your Claude Prompt — Copy & Paste</div>
+      <div class="output-box" id="outputBox"></div>
+      <button class="copy-btn" id="copyBtn" onclick="copyPrompt()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy to Clipboard
+      </button>
+      <div class="instructions">
+        <strong>How to use this prompt in Claude:</strong><br>
+        1. Open a new Claude conversation<br>
+        2. Make sure both skills are active: type <strong>/aberdeen-brand</strong> and <strong>/offering-pitch-deck</strong> (or reference them in your message)<br>
+        3. Paste this entire prompt and send<br>
+        4. Claude will research, write, and generate a .pptx — download it when ready
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Chip toggle
+  document.querySelectorAll('.chip-group label').forEach(label => {
+    label.addEventListener('click', () => {
+      setTimeout(() => {
+        const cb = label.querySelector('input[type="checkbox"]');
+        if (cb.checked) label.classList.add('active');
+        else label.classList.remove('active');
+        updateProgress();
+      }, 0);
+    });
+  });
+
+  // Progress
+  function updateProgress() {
+    const required = ['offering_name','one_liner','target_client','problem','outcome','deliverables','why_aberdeen','pricing'];
+    const filled = required.filter(id => document.getElementById(id)?.value.trim()).length;
+    document.getElementById('progressFill').style.width = (filled / required.length * 100) + '%';
+  }
+  document.querySelectorAll('input, textarea').forEach(el => el.addEventListener('input', updateProgress));
+
+  function getChips(groupId) {
+    return Array.from(document.querySelectorAll(`#${groupId} input:checked`)).map(c => c.value).join(', ');
+  }
+
+  function val(id) {
+    return (document.getElementById(id)?.value || '').trim();
+  }
+
+  function generatePrompt() {
+    const offeringName = val('offering_name');
+    if (!offeringName) { alert('Please fill in the Offering Name before generating.'); return; }
+
+    const buyers = getChips('buyer_chips');
+    const engagement = getChips('engagement_chips');
+
+    const prompt = `Use the aberdeen-brand skill and the offering-pitch-deck skill to generate a 5-slide Shark Tank pitch deck for the following Aberdeen Advisors AI service offering. Follow all instructions in the offering-pitch-deck skill exactly — research market data first, then write compelling slide content, then build and deliver the branded .pptx file.
+
+---
+
+## OFFERING DEEP DIVE FORM ANSWERS
+
+**Offering Name:** ${offeringName || '[not provided]'}
+
+**One-Line Description:** ${val('one_liner') || '[not provided]'}
+
+**Target Client / ICP:** ${val('target_client') || '[not provided]'}
+
+**Primary Buyer:** ${buyers || '[not specified]'}
+
+**Engagement Model:** ${engagement || '[not specified]'}
+
+---
+
+## THE PROBLEM
+
+**Client Problem (Pain):**
+${val('problem') || '[not provided]'}
+
+**What They've Tried Before & Why It Didn't Work:**
+${val('prior_attempts') || '[not provided]'}
+
+**Why Now — Urgency / Market Timing:**
+${val('why_now') || '[not provided]'}
+
+---
+
+## WHAT THEY GET
+
+**Outcome / Value Delivered:**
+${val('outcome') || '[not provided]'}
+
+**Specific Deliverables (3–4):**
+${val('deliverables') || '[not provided]'}
+
+**Engagement Phases:**
+${val('phases') || '[not provided — use card layout for Slide 3]'}
+
+**Typical Timeline:**
+${val('timeline') || '[not provided]'}
+
+---
+
+## WHY ABERDEEN
+
+**Why Aberdeen Over a Big Consulting Firm:**
+${val('why_aberdeen') || '[not provided]'}
+
+**Why Aberdeen Over SaaS / Off-the-Shelf Tools:**
+${val('why_not_saas') || '[not provided]'}
+
+**What Makes This Sticky / Hard to Walk Away From:**
+${val('stickiness') || '[not provided]'}
+
+**Key Tools, Platforms, Aberdeen IP:**
+${val('tools') || '[not provided]'}
+
+---
+
+## THE ASK
+
+**Pricing Model & Range:**
+${val('pricing') || '[not provided]'}
+
+**Success Metrics / KPIs:**
+${val('success_metrics') || '[not provided]'}
+
+**Sales Motion / How We Sell It:**
+${val('sales_motion') || '[not provided]'}
+
+**Risks / Open Questions (for Q&A prep, not the deck):**
+${val('risks') || '[none noted]'}
+
+**Offering Lead:**
+${val('offering_lead') || '[not assigned]'}
+
+---
+
+Please research market data as instructed, write all 5 slides with the voice and structure defined in the skill, build the branded .pptx, and summarize what data you used and any fields that were thin.`;
+
+    document.getElementById('outputBox').textContent = prompt;
+    document.getElementById('outputArea').classList.add('visible');
+    document.getElementById('copyBtn').classList.remove('copied');
+    document.getElementById('copyBtn').textContent = '📋 Copy to Clipboard';
+    document.querySelector('.generate-section').scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }
+
+  function copyPrompt() {
+    const text = document.getElementById('outputBox').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = '✓ Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = '📋 Copy to Clipboard';
+        btn.classList.remove('copied');
+      }, 2500);
+    });
+  }
+</script>
+</body>
+</html>
