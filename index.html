@@ -292,6 +292,35 @@
   .generate-btn:hover { background: #5bc8c9; transform: translateY(-1px); }
   .generate-btn:active { transform: translateY(0); }
 
+  .btn-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .download-link {
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+    background: rgba(68,176,177,0.12);
+    border: 1px solid rgba(68,176,177,0.35);
+    border-radius: 6px;
+    padding: 11px 18px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    white-space: nowrap;
+  }
+  .download-link:hover {
+    background: rgba(68,176,177,0.22);
+    color: var(--teal);
+    border-color: var(--teal);
+  }
+
   /* OUTPUT */
   .output-area {
     display: none;
@@ -567,7 +596,17 @@
   <div class="generate-section">
     <div class="generate-title">Ready to Generate Your Pitch Deck</div>
     <div class="generate-desc">Click below to create a formatted prompt. Paste it into Claude with both the <strong style="color:var(--teal)">aberdeen-brand</strong> and <strong style="color:var(--teal)">offering-pitch-deck</strong> skills active. Claude will research market data, write 5 compelling slides, and produce a branded .pptx file you can download.</div>
-    <button class="generate-btn" onclick="generatePrompt()">⚡ Generate Prompt</button>
+    <div class="btn-row">
+      <button class="generate-btn" onclick="generatePrompt()">⚡ Generate Prompt</button>
+      <a class="download-link" href="./offering-pitch-deck.skill" download>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        offering-pitch-deck.skill
+      </a>
+      <a class="download-link" href="./aberdeen-brand.skill" download>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        aberdeen-brand.skill
+      </a>
+    </div>
 
     <div class="output-area" id="outputArea">
       <div class="output-label">Your Claude Prompt — Copy & Paste</div>

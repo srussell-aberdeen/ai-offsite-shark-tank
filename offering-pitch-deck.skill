@@ -1,0 +1,286 @@
+---
+name: offering-pitch-deck
+description: >
+  Generate a 5-slide Aberdeen Advisors pitch deck for a single AI service offering.
+  Trigger when the user provides Offering Deep Dive form answers and asks to generate
+  a pitch deck, Shark Tank deck, or offering presentation. Always combine with the
+  aberdeen-brand skill — that skill handles all colors, fonts, logos, and slide templates.
+  This skill handles what goes on each slide and how to write it.
+---
+
+# Aberdeen AI Offering Pitch Deck Skill
+
+You are generating a 5-slide "Shark Tank" style pitch deck for a single Aberdeen Advisors AI service offering. The deck must be compelling, specific, and grounded in real market evidence — not generic AI consulting filler.
+
+---
+
+## STEP 1 — MANDATORY: Research Before Writing
+
+Before writing a single slide, search for current market data on this offering type. You need real numbers and context to make the deck credible.
+
+Search for ALL of the following:
+1. Market size or growth rate for this type of AI service (e.g., "agentic AI market size 2025", "ML consulting market growth")
+2. ROI benchmarks or productivity gains clients typically see (e.g., "AI automation ROI enterprise 2024", "ML forecasting accuracy improvement consulting")
+3. What major consulting firms (McKinsey, Deloitte, Accenture, BCG) charge or offer for comparable work — this is the "buy vs. Aberdeen" framing
+4. Any client pain points or adoption barriers specific to the target buyer and industry
+
+If web search is unavailable, use your training knowledge to supply realistic figures — but flag them as estimates and note the team should verify before a real client pitch.
+
+---
+
+## STEP 2 — Parse the Form Answers
+
+Extract these fields from the user's form input:
+
+| Field | Variable Name |
+|-------|---------------|
+| Offering name | `OFFERING_NAME` |
+| One-line description | `ONE_LINER` |
+| Target client / ICP | `TARGET_CLIENT` |
+| Who is the buyer | `BUYER_ROLE` |
+| Client problem (pain) | `PROBLEM` |
+| What they've tried and why it failed | `PRIOR_ATTEMPTS` |
+| Outcome / value delivered | `OUTCOME` |
+| 3–4 specific deliverables | `DELIVERABLES` |
+| Engagement model & phases | `ENGAGEMENT_MODEL` |
+| Typical timeline | `TIMELINE` |
+| Why now (urgency / market timing) | `WHY_NOW` |
+| Why Aberdeen (not big firm or SaaS) | `WHY_ABERDEEN` |
+| What makes it sticky / hard to replace | `STICKINESS` |
+| Tools, platforms, IP used | `TOOLS` |
+| Pricing model & range | `PRICING` |
+| Sales motion | `SALES_MOTION` |
+| Success metrics / KPIs | `SUCCESS_METRICS` |
+| Risks / open questions | `RISKS` |
+| Offering lead | `OFFERING_LEAD` |
+
+---
+
+## STEP 3 — Write the 5 Slides
+
+### Writing Voice
+- Short, punchy headlines. Every title should be a claim, not a label.
+  - Bad: "Problem Statement"
+  - Good: "Your Forecasts Are Wrong. You Know It. Your Board Knows It."
+- Bullets are 1 line max. No full sentences in bullets.
+- Use real numbers from your research. Make them specific.
+- Always write from the buyer's perspective — their pain, their win, their risk if they don't act.
+
+---
+
+### Slide 1 — The Hook (Title Slide)
+
+**Layout:** Cover — Aberdeen Blue background, diagonal teal stripe, white logo bottom-left
+
+**Content:**
+- **Title (2 lines):** A bold, provocative statement of the problem or opportunity — NOT the offering name
+  - Example: "Your Competitors Are Running on ML. / You're Still Running on Excel."
+  - Example: "Agents Don't Sleep. / Your Ops Team Does."
+- **Subtitle:** `OFFERING_NAME` (bold, white, ~16pt)
+- **One-liner:** `ONE_LINER` (lighter weight, ~12pt, muted white)
+- **No byline on this slide.** Do not include presenting team member names here — they appear on slide 5 only.
+
+**Writing rule:** The title should make a skeptical CFO or COO pause. It names their reality, not your service. Keep it to two short punchy lines — not one run-on sentence.
+
+---
+
+### Slide 2 — The Problem & Market Moment (Why This, Why Now)
+
+**Layout:** Content slide — white background, Aberdeen Blue title bar, two columns
+
+**Left column — The Problem:**
+- Headline: `PROBLEM` distilled to one sharp sentence
+- 3–4 bullets from `PROBLEM` and `PRIOR_ATTEMPTS`:
+  - The core pain (quantified if possible)
+  - What they've tried
+  - Why it hasn't worked
+  - The cost of inaction (use research data)
+
+**Right column — Why Now:**
+- Headline: `WHY_NOW` as a claim
+- 3 bullets drawing on market research:
+  - Market signal with cited source and year
+  - Technology inflection point
+  - Competitive urgency
+
+**Citation formatting rule:** All bullet text must be the same font size (11pt) and same font face (Arial). Sources in parentheses — e.g., `(Deloitte CFO Signals, Q4 2025)` — should be grey `RGBColor(150,150,150)` while the surrounding text is dark `RGBColor(64,64,64)`. Implement this by splitting each paragraph's runs on `(` and `)` characters and rebuilding them as separate runs with explicit color and `typeface='Arial'` set on each run's `<a:latin>` element. Never use a different font size or a smaller size for citations — size must be uniform throughout.
+
+**Kicker bar (bottom, teal):** One sentence tying the two columns together.
+
+---
+
+### Slide 3 — The Offering (What You Get)
+
+**Layout:** Content slide — 3-column phased timeline (Discover → Build → Operate) or 3 deliverable cards
+
+**Header:** "What [TARGET_CLIENT] Gets from Aberdeen"
+
+**For each phase (max 3):**
+- Phase number + name + duration (in colored header band)
+- 2–3 specific activities
+- 1 bold ✓ Deliverable line per phase
+
+**Always include at bottom:**
+- A dark callout bar: "Typical engagement: `TIMELINE` · `PRICING`"
+- A tools line: "Stack: [key tools from `TOOLS`]"
+
+**Kicker bar (bottom, teal):** One line on what every deliverable is — e.g., "Every deliverable ships as a working artifact — not a deck, not a recommendation."
+
+---
+
+### Slide 4 — The Aberdeen Advantage (Why Us)
+
+**Layout:** Content slide — 2×2 grid of differentiation cards
+
+**Header:** A competitive claim, not "Why Aberdeen"
+- Example: "Senior Experts From Day One. Fixed Fee. No Surprises."
+
+**4 cards** (each with a colored left accent bar):
+1. vs. Big 4 / Large Consulting
+2. vs. SaaS / Off-the-Shelf Tools
+3. Aberdeen IP & Accelerators
+4. Stickiness / Why They Stay
+
+Each card: bold teal title, 4 tight bullets (1 line each).
+
+**Below the grid:** "Already seeing demand from: [client names]" callout — only if client names are available and approved.
+
+**Kicker bar (bottom, teal):** One line on what Aberdeen won't do.
+
+---
+
+### Slide 5 — The Ask & Next Steps
+
+**Layout:** Dark slide — Aberdeen Blue background, white/teal text, 3-column structure
+
+**Header:** "`OFFERING_NAME` — Here's How We Start"
+
+**Left column — The Investment:**
+- Fixed-fee build range
+- Retainer range (if applicable)
+- Timeline
+- Team (roles only, no org chart)
+
+**Center column — Success at 90 Days:**
+- 3–4 metric blocks, each with: icon + label + specific measurable outcome
+- At least one quantified (hours saved, % improvement, user count)
+
+**Right column — 3 Steps to Kick Off:**
+- Numbered 1–2–3 with teal circle badges
+- Each step: bold title (max ~5 words) + 1–2 line description
+- Steps drawn directly from `SALES_MOTION`
+
+**Bottom of slide (outside columns):**
+- Right-aligned: "Offering Lead: `OFFERING_LEAD` · [Month Year]"
+- Teal kicker bar spanning full width: urgency line from `WHY_NOW`
+- Logo sits inside the left side of the kicker bar
+
+---
+
+## STEP 4 — Build the Deck
+
+Read the brand skill first:
+```
+/mnt/skills/user/aberdeen-brand/SKILL.md
+```
+
+Then build using python-pptx. Key rules:
+
+### Starting point
+```bash
+cp /mnt/skills/user/aberdeen-brand/assets/blank-shell.pptx /home/claude/working-deck.pptx
+```
+Always use **Blank (layout index 15)** for every slide — do NOT use Title_Dark or other named layouts. Named layouts inject placeholder shapes ("This is slide DL", "Subtitle goes here", "MM, DD, YYYY") that bleed through onto the slide even when empty. Build all content with explicit text boxes and shapes instead.
+
+### Slide master logo
+The blank-shell master injects a blue Aberdeen logo at bottom-left on every slide (left=0.292", top=5.325", w=0.726"). This is correct for light slides (2–4). For dark slides (1, 5), cover that area with an Aberdeen Blue rectangle and place `logo-dark.png` on top.
+
+### Logo generation
+```bash
+python /mnt/skills/user/aberdeen-brand/scripts/make_logo.py \
+    --svg /mnt/skills/user/aberdeen-brand/assets/logo-white.svg \
+    --bg 9,55,95 --out /home/claude/logo-dark.png
+
+python /mnt/skills/user/aberdeen-brand/scripts/make_logo.py \
+    --svg /mnt/skills/user/aberdeen-brand/assets/logo-blue.svg \
+    --bg 255,255,255 --out /home/claude/logo-light.png
+```
+
+### Placeholder removal (critical)
+After adding any slide using a non-Blank layout, immediately remove all placeholder shapes from the slide XML:
+```python
+from pptx.oxml.ns import qn
+spTree = slide.shapes._spTree
+for sp in list(spTree):
+    if sp.tag.endswith('}sp'):
+        if sp.find(f'.//{qn("p:ph")}') is not None:
+            spTree.remove(sp)
+```
+
+### Text box sizing rules
+- **Always set `word_wrap = True`** on every text frame.
+- **Enable spAutoFit** on any text box whose content may vary in length (step titles, step descriptions, one-liners). This prevents overflow when text is longer on future decks:
+```python
+from pptx.oxml.ns import qn
+from lxml import etree
+bodyPr = shape.text_frame._txBody.find(qn('a:bodyPr'))
+etree.SubElement(bodyPr, qn('a:spAutoFit'))
+```
+- **Never rely on python-pptx's reported height** to determine if text fits — always render to image and visually verify.
+
+### Slide 1 cover — spacing rules
+- Title line 1 and line 2 must be in **separate text boxes** so each can be positioned independently. Never put both lines in one box — the box height is fixed and they will overlap if either line wraps.
+- Subtitle and one-liner must start **below** where the title text visually ends, not where the title *box* ends. At 34pt bold, two title lines occupy approximately 1.2" of rendered height each; leave at least 0.3" of breathing room before the subtitle.
+- Do **not** include a byline (presenter name / date) on slide 1. Presenter credit goes on slide 5 only.
+
+### Slide 5 — step column layout rules
+- Each step block has: circle badge + number + title + description + divider line.
+- **Title boxes must be tall enough for 2-line wrap** (use height=0.50"). Step titles like "Scoped Proposal in 5 Business Days" are 6+ words and will wrap at the column width. A 0.28" box will clip the second line and overlap the description below.
+- Space steps with **consistent fixed gaps from each step's base top**, not from the previous step's bottom — previous-bottom-based stacking compounds any rendering discrepancy:
+  - Step 1 base: ~1.24"
+  - Step 2 base: ~2.38"
+  - Step 3 base: ~3.52"
+  - Title: base − 0.04"
+  - Description: base + 0.54"
+  - Divider: base + 1.14"
+- Enable spAutoFit on all title and description boxes.
+
+### Slide 5 — kicker bar + logo
+- The teal kicker bar spans the full slide width (0 to 10").
+- Place the logo **inside** the kicker bar on the left (left=0.18", vertically centered in the bar).
+- Start the kicker text at left=1.72" so it clears the logo without overlap.
+- The "Offering Lead" line sits **above** the kicker bar, right-aligned, at ~top=5.0".
+
+---
+
+## STEP 5 — QA
+
+Convert to images and inspect every slide:
+```bash
+python scripts/office/soffice.py --headless --convert-to pdf output.pptx
+pdftoppm -jpeg -r 150 output.pdf slide
+```
+
+Check for:
+- [ ] No placeholder text ("This is slide DL", "Subtitle goes here", "MM, DD, YYYY")
+- [ ] Single logo per slide (no duplicates)
+- [ ] Slide 1: title lines not overlapping each other or the subtitle
+- [ ] Slide 5: each step title and description fully separated with no overlap
+- [ ] Slide 5: kicker bar text fully visible (not clipped by logo)
+- [ ] No text boxes overflowing their containers
+- [ ] All teal kicker bars present on slides 2, 3, 4, 5
+
+**Note on LibreOffice rendering:** LibreOffice does not render the Aberdeen Blue background fill on dark slides (1 and 5) — they appear white in the preview images. This is a renderer-only artifact; the background is correctly embedded in the .pptx and will display properly in PowerPoint. Do not attempt to "fix" this by adding a full-slide blue rectangle — it will not help in LibreOffice and may break the PowerPoint rendering.
+
+---
+
+## OUTPUT
+
+Deliver a `.pptx` file named:
+`[OFFERING_NAME_SLUG]-pitch-deck.pptx`
+(e.g., `core-ai-ml-dashboards-pitch-deck.pptx`)
+
+Include a brief summary in chat:
+- What market data was used (or flagged as estimates)
+- Any form fields that were thin or missing — flag for the team to strengthen before a real client pitch
+- Any risks from `RISKS` that should be addressed in Q&A prep
